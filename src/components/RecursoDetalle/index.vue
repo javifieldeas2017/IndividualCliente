@@ -24,30 +24,28 @@
 					<div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 						<label class="col-xs-3">Tipo</label>
 						<div class="col-xs-9">
-							<select name="pais" id="pais" :disabled="!isEditable" v-model="recurso.Tipo" class="form-control input" aria-label="Categoria">
-								<option value="" selected disabled hidden>Escoja tipo</option>
+							<select name="pais" id="pais" :click="onSelectedTipo($event)" :disabled="!isEditable" v-model="recurso.Tipo" class="form-control input" aria-label="Categoria">
 								<option>Libro</option>
 								<option>Video</option>
 								<option>Audio</option>
 							</select>
-
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div v-if="recurso.Tipo =='Libro'" class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 						<label class="col-xs-3">ISBN</label>
 						<div class="col-xs-9">
 							<input :disabled="!isEditable" v-model="recurso.ISBN" type="text" class="form-control" aria-label="Nombre">
 						</div>
 					</div>
-					<div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div v-if="recurso.Tipo =='Video'" class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 						<label class="col-xs-3">ISAN</label>
 						<div class="col-xs-9">
 							<input :disabled="!isEditable" v-model="recurso.ISAN" type="text" class="form-control" aria-label="Nombre">
 						</div>
 					</div>
-					<div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div v-if="recurso.Tipo =='Audio'" class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 						<label class="col-xs-3">ISMN</label>
 						<div class="col-xs-9">
 							<input :disabled="!isEditable" v-model="recurso.ISMN" type="text" class="form-control" aria-label="Nombre">

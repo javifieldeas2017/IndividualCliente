@@ -6,7 +6,7 @@
 					<div class="container-fluid">
 						<div class="navbar-header">
 							<a class="navbar-brand" href="#">
-								<img src="http://lorempixel.com/output/abstract-q-c-512-512-8.jpg" :alt="datos.nombre">
+								<img :src="datos.logo" :alt="datos.nombre">
 							</a>
 						</div>
 						<ul class="nav navbar-nav">

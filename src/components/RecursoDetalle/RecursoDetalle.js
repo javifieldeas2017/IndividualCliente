@@ -2,7 +2,7 @@ var _ = require('lodash');
 export default {
   name : 'Detail',
   data() {
-    return {recurso: {}, recursoBackUp: {}, isEditable: false}
+    return {recurso: {}, recursoBackUp: {}, isEditable: false, tipos:["libro","video","audio"]}
   },
   created() {
     this.getID()
@@ -13,13 +13,15 @@ export default {
   computed : {
     disableUpdate: function () {
       var propiedades = [
-        "Nombre",
-        "Exito",
-        "Mensaje",
-        "FechaInicio",
-        "FechaFinal",
-        "ConsumoMemoria",
-        "ConsumoRed"
+        "Tipo",
+        "ISBN",
+        "ISAN",
+        "ISMN",
+        "idCopia",
+        "Categoria",
+        "Titulo",
+        "Autor",
+        "Anio"
       ];
       var disable = true;
       for (var i = 0; i < propiedades.length; i++) {
@@ -32,6 +34,9 @@ export default {
     }
   },
   methods : {
+    onSelectedTipo(event){
+      this.recurso.Tipo = event.target.value;
+    },
     notValid: function () {
       var mensaje = "";
       if (!this.recurso.Nombre || this.recurso.Nombre.length <= 0 || this.recurso.Nombre.length > 40) {
