@@ -1,0 +1,28 @@
+#RecursoMaestro .list-group-item:hover {
+  background-color: #E2E5E0;
+}
+
+#RecursoMaestro #insertar {
+  margin-bottom: 10px;
+}
+
+#RecursoMaestro .circulo {
+  background-color: red;
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+}
+
+#RecursoMaestro .list-group-item .circulo {
+  padding: 10px;
+  float: left;
+}
+
+#RecursoMaestro .list-group-item .circulo>i {
+  color: white;
+  font-size: 20px;
+}
+
+#RecursoMaestro .boton_eliminar, #RecursoMaestro #insertar {
+    float: right;
+  }
