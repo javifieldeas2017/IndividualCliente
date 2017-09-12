@@ -2,22 +2,13 @@ export default {
   name : 'Detail',
   data() {
     return {
-      urlService: 'http://localhost:50479/api/Recursos/',
-      recurso: {},
+      urlService: 'http://localhost:50479/api/Usuarios/',
+      usuario: {},
       Tipo: "",
-      Categoria: "",
-      recursoBackUp: {},
+      usuarioBackUp: {},
       isEditable: false,
       tipos: [
-        "Libro", "Video", "Audio"
-      ],
-      categorias: [
-        "Literatura",
-        "Ciencias",
-        "Historia",
-        "Idiomas",
-        "Educación",
-        "Arte"
+        "Estudiante", "Trabajador", "Desempleado", "Jubilado","Familia numerosa"
       ]
     }
   },
@@ -30,22 +21,20 @@ export default {
   computed : {
     disableUpdate: function () {
       var propiedades = [
-        "ISBN",
-        "ISAN",
-        "ISMN",
-        "idCopia",
-        "Titulo",
-        "Autor",
-        "Anio"
+        "NIF",
+        "Tipo",
+        "Nombre",
+        "Domicilio",
+        "Telefono",
       ];
       var disable = true;
       for (var i = 0; i < propiedades.length; i++) {
-        if (this.recurso[propiedades[i]] != this.recursoBackUp[propiedades[i]]) {
+        if (this.usuario[propiedades[i]] != this.usuarioBackUp[propiedades[i]]) {
           disable = false;
           break;
         }
       }
-      if (this.Tipo != this.recurso.Tipo || this.Categoria != this.recurso.Categoria) 
+      if (this.Tipo != this.usuario.Tipo) 
         disable = false;
       return (disable || !this.isEditable);
     }
@@ -56,59 +45,43 @@ export default {
       if (!this.Tipo) {
         mensaje += "&#9888; Seleccione un tipo.<br>";
       }
-      if (!this.Categoria) {
-        mensaje += "&#9888; Seleccione una categoría.<br>";
+      if (!this.usuario.NIF || this.usuario.NIF.length <= 0 || this.usuario.NIF.length > 120) {
+        mensaje += "&#9888; El NIF tiene que tener formato válido.<br>";
       }
-      if (!this.recurso.Titulo || this.recurso.Titulo.length <= 0 || this.recurso.Titulo.length > 120) {
-        mensaje += "&#9888; El título tiene que tener entre 1 y 120 caracteres.<br>";
+      if (!this.usuario.Nombre || this.usuario.Nombre.length < 8 || this.usuario.Nombre.length > 120) {
+        mensaje += "&#9888; El nombre tiene que tener entre 8 y 120 caracteres.<br>";
       }
-      if (!this.recurso.Autor || this.recurso.Autor.length <= 0 || this.recurso.Autor.length > 70) {
-        mensaje += "&#9888; El nombre de autor tiene que tener entre 1 y 70 caracteres.<br>";
+
+      if (!this.usuario.Domicilio || this.usuario.Domicilio.length < 8 || this.usuario.Domicilio.length > 120) {
+        mensaje += "&#9888; El domicilio tiene que tener entre 8 y 120 caracteres.<br>";
       }
-      if (isNaN(parseInt(this.recurso.Anio))) {
-        mensaje += "&#9888; El año debe ser un numero entero.<br>";
+
+      if (isNaN(parseInt(this.usuario.Telefono))) {
+        mensaje += "&#9888; El teléfono debe ser un número entero.<br>";
       }
-      var tipoId;
-      switch (this.Tipo) {
-        case "Libro":
-          if (isNaN(parseInt(this.recurso.ISBN)) && (this.recurso.ISBN.length < 6 || this.recurso.ISBN.length > 10)) 
-            tipoId = "ISBN";
-          break;
-        case "Video":
-          if (isNaN(parseInt(this.recurso.Anio)) && (this.recurso.ISAN.length < 6 || this.recurso.ISAN.length > 10))
-            tipoId = "ISMN";
-          break;
-        case "Audio":
-          if (isNaN(parseInt(this.recurso.Anio)) && (this.recurso.ISMN.length < 6 || this.recurso.ISMN.length > 10))
-            tipoId = "ISAN";
-          break;
-        default:
-          break;
-      }
-      if (tipoId) 
-        mensaje += "&#9888; El " + tipoId + " debe contener entre 6 y 10 dígitos.<br>";
+
       return mensaje;
     },
     cancelarEdicion() {
-      this.recurso = JSON.parse(JSON.stringify(this.recursoBackUp))
+      this.usuario = JSON.parse(JSON.stringify(this.usuarioBackUp))
     },
     goToMaestro() {
       this
         .$router
-        .push('/RecursoMaestro');
+        .push('/UsuarioMaestro');
     },
     getID() {
       let _this = this
-      this.idRecurso = this.$route.params.id
+      this.idUsuario = this.$route.params.id
       if (this.$route.params.id) {
         $.ajax({
           type: 'GET',
-          url: this.urlService + this.idRecurso,
+          url: this.urlService + this.idUsuario,
           success: function (response) {
-            _this.recurso = JSON.parse(JSON.stringify(response))
-            _this.Tipo = _this.recurso.Tipo;
-            _this.Categoria = _this.recurso.Categoria;
-            _this.recursoBackUp = JSON.parse(JSON.stringify(response))
+            _this.usuario = JSON.parse(JSON.stringify(response))
+            _this.Tipo = _this.usuario.Tipo;
+            _this.Categoria = _this.usuario.Categoria;
+            _this.usuarioBackUp = JSON.parse(JSON.stringify(response))
             this.isEditable = false;
           },
           error: _this.error
@@ -119,8 +92,8 @@ export default {
     },
     guardarDatos() {
       let _this = this;
-      this.recurso.Tipo = this.Tipo;
-      this.recurso.Categoria = this.Categoria;
+      this.usuario.Tipo = this.Tipo;
+      this.usuario.Categoria = this.Categoria;
       var mensaje = this.notValid();
       if (mensaje) {
         bootbox.alert({message: mensaje, size: 'small'})
@@ -128,16 +101,16 @@ export default {
         $.ajax({
           type: 'POST',
           url: this.urlService,
-          data: _this.recurso,
+          data: _this.usuario,
           success: (response) => {
-            _this.recurso = {};
+            _this.usuario = {};
             bootbox.alert({
               message: "¡Guardado realizado con éxito!",
               size: 'small',
               callback: function () {
                 _this
                   .$router
-                  .push('/RecursoMaestro');
+                  .push('/UsuarioMaestro');
               }
             });
           },
@@ -167,22 +140,22 @@ export default {
             }
           },
           callback: function (result) {
-            _this.recurso.Tipo = _this.Tipo;
-            _this.recurso.Categoria = _this.Categoria;
+            _this.usuario.Tipo = _this.Tipo;
+            _this.usuario.Categoria = _this.Categoria;
             if (result) {
               $.ajax({
                 type: 'PUT',
-                url: _this.urlService + _this.idRecurso,
-                data: _this.recurso,
+                url: _this.urlService + _this.idUsuario,
+                data: _this.usuario,
                 success: (response) => {
-                  _this.recurso = {};
+                  _this.usuario = {};
                   bootbox.alert({
                     message: "¡Actualización realizada con éxito!",
                     size: 'small',
                     callback: function () {
                       _this
                         .$router
-                        .push('/RecursoMaestro');
+                        .push('/UsuarioMaestro');
                     }
                   })
 

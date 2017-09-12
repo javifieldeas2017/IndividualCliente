@@ -1,0 +1,48 @@
+#UsuarioMaestro .list-group-item:hover {
+  background-color: #E2E5E0;
+}
+
+#UsuarioMaestro #insertar {
+  margin-bottom: 10px;
+}
+
+#UsuarioMaestro .circulo {
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+}
+
+#UsuarioMaestro .list-group-item .circulo {
+  padding: 9px 0px 10px 0px;
+  float: left;
+}
+
+#UsuarioMaestro .list-group-item .circulo>i {
+  color: white;
+  font-size: 20px;
+}
+
+#UsuarioMaestro .boton_eliminar,
+#UsuarioMaestro #insertar {
+  float: right;
+}
+
+.Estudiante {
+  background-color: #9850FD;
+}
+
+.Trabajador {
+  background-color: #1DA810;
+}
+
+.Desempleado {
+  background-color: #FF8800;
+}
+
+.Jubilado {
+  background-color: #0014FF;
+}
+
+.Familia {
+  background-color: #FF0000;
+}

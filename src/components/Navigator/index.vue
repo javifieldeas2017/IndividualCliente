@@ -15,7 +15,13 @@
 				<ul class="nav navbar-nav">
 					<li>
 						<router-link to="/RecursoMaestro">
-							<i class="fa fa-list-ul" aria-hidden="true"></i>Catalogo</router-link>
+							<i class="fa fa-list-ul" aria-hidden="true"></i>Catalogo
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/UsuarioMaestro">
+							<i class="fa fa-user" aria-hidden="true"></i>Usuarios
+						</router-link>
 					</li>
 				</ul>
 			</div>

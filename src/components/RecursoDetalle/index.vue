@@ -26,7 +26,7 @@
 						<div class="col-xs-9">
 							<select name="tipo" id="tipo" :disabled="!isEditable" v-model="Tipo" class="form-control input" aria-label="Tipo">
 								<option value="" disabled selected hidden>Seleccione tipo</option>
-								<option v-for="tipo in tipos" :value="tipo">{{tipo}}</option>
+								<option v-for="tipo in tipos" :value="tipo" :key="tipo">{{tipo}}</option>
 							</select>
 						</div>
 					</div>

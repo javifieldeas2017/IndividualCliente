@@ -5,6 +5,8 @@ Vue.use(Router)
 
 import RecursoMaestro from '../components/RecursoMaestro'
 import RecursoDetalle from '../components/RecursoDetalle'
+import UsuarioMaestro from '../components/UsuarioMaestro'
+import UsuarioDetalle from '../components/UsuarioDetalle'
 
 
 export default new Router({
@@ -23,6 +25,21 @@ export default new Router({
       path: '/RecursoDetalle/:id',
       name: 'RecursoDetalleId',
       component: RecursoDetalle
+    },
+    {
+      path: '/UsuarioMaestro/',
+      name: 'UsuarioMaestro',
+      component: UsuarioMaestro
+    },
+    {
+      path: '/UsuarioDetalle/',
+      name: 'UsuarioDetalle',
+      component: UsuarioDetalle
+    },
+    {
+      path: '/UsuarioDetalle/:id',
+      name: 'UsuarioDetalleId',
+      component: UsuarioDetalle
     }
   ],
   mode: 'hash'
