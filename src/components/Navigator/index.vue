@@ -1,24 +1,26 @@
 <template>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-12">
-				<nav class="navbar navbar-default">
-					<div class="container-fluid">
-						<div class="navbar-header">
-							<a class="navbar-brand" href="#">
-								<img :src="datos.logo" :alt="datos.nombre">
-							</a>
-						</div>
-						<ul class="nav navbar-nav">
-							<li>
-								<router-link to="/RecursoMaestro"><i class="fa fa-list-ul" aria-hidden="true"></i>Recursos</router-link>
-							</li>
-						</ul>
-					</div>
-				</nav>
+	<nav id="navigator" class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">
+					<img :src="datos.logo" :alt="datos.nombre">
+				</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li>
+						<router-link to="/RecursoMaestro">
+							<i class="fa fa-list-ul" aria-hidden="true"></i>Catalogo</router-link>
+					</li>
+				</ul>
 			</div>
 		</div>
-	</div>
+	</nav>
 </template>
 
 <script src="./Navigator.js" type="text/javascript" charset="utf-8"></script>

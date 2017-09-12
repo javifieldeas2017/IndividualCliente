@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       datos: {
-        logo: require('./assets/img/checklist.png'),
+        logo: require('./assets/img/books.png'),
         nombre: 'Biblioteca CIC'
       }
     }

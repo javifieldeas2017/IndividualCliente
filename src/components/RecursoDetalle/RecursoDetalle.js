@@ -1,8 +1,25 @@
-var _ = require('lodash');
 export default {
   name : 'Detail',
   data() {
-    return {recurso: {}, recursoBackUp: {}, isEditable: false, tipos:["libro","video","audio"]}
+    return {
+      urlService: 'http://localhost:50479/api/Recursos/',
+      recurso: {},
+      Tipo: "",
+      Categoria: "",
+      recursoBackUp: {},
+      isEditable: false,
+      tipos: [
+        "Libro", "Video", "Audio"
+      ],
+      categorias: [
+        "Literatura",
+        "Ciencias",
+        "Historia",
+        "Idiomas",
+        "Educación",
+        "Arte"
+      ]
+    }
   },
   created() {
     this.getID()
@@ -13,12 +30,10 @@ export default {
   computed : {
     disableUpdate: function () {
       var propiedades = [
-        "Tipo",
         "ISBN",
         "ISAN",
         "ISMN",
         "idCopia",
-        "Categoria",
         "Titulo",
         "Autor",
         "Anio"
@@ -30,44 +45,48 @@ export default {
           break;
         }
       }
+      if (this.Tipo != this.recurso.Tipo || this.Categoria != this.recurso.Categoria) 
+        disable = false;
       return (disable || !this.isEditable);
     }
   },
   methods : {
-    onSelectedTipo(event){
-      this.recurso.Tipo = event.target.value;
-    },
     notValid: function () {
       var mensaje = "";
-      if (!this.recurso.Nombre || this.recurso.Nombre.length <= 0 || this.recurso.Nombre.length > 40) {
-        mensaje += "&#9888; Nombre tiene que tener entre 1 y 40 caracteres.<br>";
+      if (!this.Tipo) {
+        mensaje += "&#9888; Seleccione un tipo.<br>";
       }
-      if (!this.recurso.Mensaje || this.recurso.Mensaje.length <= 0 || this.recurso.Mensaje.length > 100) {
-        mensaje += "&#9888; Mensaje tiene que tener entre 1 y 100 caracteres.<br>";
+      if (!this.Categoria) {
+        mensaje += "&#9888; Seleccione una categoría.<br>";
       }
-
-      if (isNaN(parseFloat(this.recurso.ConsumoRed))) {
-        mensaje += "&#9888; Consumo de red tiene que ser un numero.<br>";
-      } else if (this.recurso.ConsumoRed <= 0)  {
-        mensaje += "&#9888; Consumo de red tiene que ser un numero mayor que 0.<br>";
+      if (!this.recurso.Titulo || this.recurso.Titulo.length <= 0 || this.recurso.Titulo.length > 120) {
+        mensaje += "&#9888; El título tiene que tener entre 1 y 120 caracteres.<br>";
       }
-      if (isNaN(parseFloat(this.recurso.ConsumoMemoria))) {
-        mensaje += "&#9888; Consumo de memoria tiene que ser un numero.<br>";
-      } else if (this.recurso.ConsumoMemoria <= 0) {
-        mensaje += "&#9888; Consumo de memoria tiene que ser un numero mayor que 0.<br>";
+      if (!this.recurso.Autor || this.recurso.Autor.length <= 0 || this.recurso.Autor.length > 70) {
+        mensaje += "&#9888; El nombre de autor tiene que tener entre 1 y 70 caracteres.<br>";
       }
-      if(!!this.recurso.FechaInicio == false){
-        mensaje += "&#9888; Introduzca una fecha de inicio<br>";
-      }else if (isNaN(Date.parse(this.recurso.FechaInicio.split('/').reverse().join('-')))) {
-        mensaje += "&#9888; Fecha de inicio ha de ser una fecha valida, formato dd/mm/aaaa.<br>";
+      if (isNaN(parseInt(this.recurso.Anio))) {
+        mensaje += "&#9888; El año debe ser un numero entero.<br>";
       }
-      if(!!this.recurso.FechaFinal == false){
-        mensaje += "&#9888; Introduzca una fecha final<br>";
-      }else if (isNaN(Date.parse(this.recurso.FechaFinal.split('/').reverse().join('-')))) {
-        mensaje += "&#9888; Fecha final ha de ser una fecha valida, formato dd/mm/aaaa.<br>";
+      var tipoId;
+      switch (this.Tipo) {
+        case "Libro":
+          if (this.recurso.ISBN.length < 6 || this.recurso.ISBN.length > 10) 
+            tipoId = "ISBN";
+          break;
+        case "Video":
+          if (this.recurso.ISAN.length < 6 || this.recurso.ISAN.length > 10) 
+            tipoId = "ISBN";
+          break;
+        case "Audio":
+          if (this.recurso.ISMN.length < 6 || this.recurso.ISMN.length > 10) 
+            tipoId = "ISBN";
+          break;
+        default:
+          break;
       }
-
-
+      if (tipoId) 
+        mensaje += "&#9888; El " + tipoId + " debe contener entre 6 y 10 dígitos.<br>";
       return mensaje;
     },
     cancelarEdicion() {
@@ -79,18 +98,20 @@ export default {
         .push('/RecursoMaestro');
     },
     getID() {
-      const _self = this
+      let _this = this
       this.idRecurso = this.$route.params.id
       if (this.$route.params.id) {
         $.ajax({
           type: 'GET',
-          url: 'http://localhost:51952/api/Recursos/' + this.idRecurso,
+          url: this.urlService + this.idRecurso,
           success: function (response) {
-            _self.recurso = JSON.parse(JSON.stringify(response))
-            _self.recursoBackUp = JSON.parse(JSON.stringify(response))
+            _this.recurso = JSON.parse(JSON.stringify(response))
+            _this.Tipo = _this.recurso.Tipo;
+            _this.Categoria = _this.recurso.Categoria;
+            _this.recursoBackUp = JSON.parse(JSON.stringify(response))
             this.isEditable = false;
           },
-          error: _self.error
+          error: _this.error
         })
       } else {
         this.isEditable = true;
@@ -98,13 +119,15 @@ export default {
     },
     guardarDatos() {
       let _this = this;
+      this.recurso.Tipo = this.Tipo;
+      this.recurso.Categoria = this.Categoria;
       var mensaje = this.notValid();
       if (mensaje) {
         bootbox.alert({message: mensaje, size: 'small'})
       } else {
         $.ajax({
           type: 'POST',
-          url: 'http://localhost:51952/api/Recursos/',
+          url: this.urlService,
           data: _this.recurso,
           success: (response) => {
             _this.recurso = {};
@@ -144,10 +167,12 @@ export default {
             }
           },
           callback: function (result) {
+            _this.recurso.Tipo = _this.Tipo;
+            _this.recurso.Categoria = _this.Categoria;
             if (result) {
               $.ajax({
                 type: 'PUT',
-                url: 'http://localhost:51952/api/Recursos/' + _this.idRecurso,
+                url: _this.urlService + _this.idRecurso,
                 data: _this.recurso,
                 success: (response) => {
                   _this.recurso = {};
@@ -171,14 +196,6 @@ export default {
     },
     error: function (xhr, textStatus, errorThrown) {
       bootbox.alert("Error!->" + errorThrown + "-->" + xhr.responseText);
-    },
-    convertDateFormat: function (string) {
-      var info = string
-        .split('-')
-        .reverse()
-        .join('/');
-      return info;
     }
-  },
-  components : {}
+  }
 }

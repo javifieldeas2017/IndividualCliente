@@ -7,14 +7,13 @@
 }
 
 #RecursoMaestro .circulo {
-  background-color: red;
   height: 38px;
   width: 38px;
   border-radius: 50%;
 }
 
 #RecursoMaestro .list-group-item .circulo {
-  padding: 10px;
+  padding: 9px 0px 10px 0px;
   float: left;
 }
 
@@ -23,6 +22,19 @@
   font-size: 20px;
 }
 
-#RecursoMaestro .boton_eliminar, #RecursoMaestro #insertar {
-    float: right;
-  }
+#RecursoMaestro .boton_eliminar,
+#RecursoMaestro #insertar {
+  float: right;
+}
+
+.Libro {
+  background-color: #9850FD;
+}
+
+.Video {
+  background-color: #1DA810;
+}
+
+.Audio {
+  background-color: #FF8800;
+}

@@ -2,14 +2,14 @@ import $ from 'jquery'
 export default {
   name : 'RecursoMaestro',
   data() {
-    return {urlService: 'http://localhost:50479/api/Recursos' , items: [], isOpen: false}
+    return {urlService: 'http://localhost:50479/api/Recursos/' , items: [], isOpen: false}
   },
   methods : {
     getTodos() {
-      let _this = this
+      let _this = this;
       $.ajax({
         type: 'GET',
-        url: this.urlService,
+        url: _this.urlService,
         success: function (response) {
           _this.items = JSON.parse(JSON.stringify(response))
         },
@@ -17,7 +17,7 @@ export default {
       })
     },
     eliminarObjeto(id) {
-      let _this = this
+      let _this = this;
 
       bootbox.confirm({
         message: "¿Eliminar de forma permanente?",
@@ -36,7 +36,7 @@ export default {
           if (result) {
             $.ajax({
               type: 'DELETE',
-              url: this.urlService + id,
+              url: _this.urlService + id,
               success: function (response) {},
               error: _this.error,
               complete: function () {
