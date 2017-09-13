@@ -15,7 +15,7 @@
 						</button>
 					</div>
 					<div class="col-xs-12">
-						<h2>{{!Object.keys(usuarioBackUp).length?"Nuevo Usuario":"Detalle del Usuario"}}</h2>
+						<h2>{{!Object.keys(usuarioBackUp).length?"Nuevo usuario":"Detalle del Usuario"}}</h2>
 					</div>
 				</div>
 			</div>

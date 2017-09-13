@@ -2,7 +2,6 @@
 	<div id="RecursoMaestro">
 		<div class="container-fluid">
 			<div>
-				<h3>Catálogo de recursos</h3>
 
 				<button id="insertar" @click="nuevoitem()" class="btn btn-success">
 					<i class="fa fa-plus"></i> Inserción

@@ -2,7 +2,6 @@
 	<div id="UsuarioMaestro">
 		<div class="container-fluid">
 			<div>
-				<h3>Usuarios</h3>
 
 				<button id="insertar" @click="nuevoitem()" class="btn btn-success">
 					<i class="fa fa-plus"></i> Inserción
