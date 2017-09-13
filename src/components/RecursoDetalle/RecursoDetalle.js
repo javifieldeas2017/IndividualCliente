@@ -66,30 +66,37 @@ export default {
         mensaje += "&#9888; El nombre de autor tiene que tener entre 1 y 70 caracteres.<br>";
       }
       if (isNaN(parseInt(this.recurso.Anio))) {
-        mensaje += "&#9888; El año debe ser un numero entero.<br>";
+        mensaje += "&#9888; El año debe ser un número entero.<br>";
       }
       var tipoId;
       switch (this.Tipo) {
         case "Libro":
-          if (isNaN(parseInt(this.recurso.ISBN)) && (this.recurso.ISBN.length < 6 || this.recurso.ISBN.length > 10)) 
+          if (isNaN(parseInt(this.recurso.ISBN)) || this.recurso.ISBN.length != 10) 
             tipoId = "ISBN";
           break;
         case "Video":
-          if (isNaN(parseInt(this.recurso.Anio)) && (this.recurso.ISAN.length < 6 || this.recurso.ISAN.length > 10))
-            tipoId = "ISMN";
+          if (isNaN(parseInt(this.recurso.ISAN)) || this.recurso.ISAN.length != 10) 
+            tipoId = "ISAN";
           break;
         case "Audio":
-          if (isNaN(parseInt(this.recurso.Anio)) && (this.recurso.ISMN.length < 6 || this.recurso.ISMN.length > 10))
-            tipoId = "ISAN";
+          if (isNaN(parseInt(this.recurso.ISMN)) || this.recurso.ISMN.length != 10) 
+            tipoId = "ISMN";
           break;
         default:
           break;
       }
       if (tipoId) 
-        mensaje += "&#9888; El " + tipoId + " debe contener entre 6 y 10 dígitos.<br>";
+        mensaje += "&#9888; El " + tipoId + " debe contener 10 dígitos numéricos.<br>";
       return mensaje;
     },
     cancelarEdicion() {
+      if (!Object.keys(this.recursoBackUp).length) {
+        this.Tipo = "";
+        this.Categoria = "";
+      } else {
+        this.Tipo = this.recursoBackUp.Tipo;
+        this.Categoria = this.recursoBackUp.Categoria;
+      }
       this.recurso = JSON.parse(JSON.stringify(this.recursoBackUp))
     },
     goToMaestro() {

@@ -4,13 +4,13 @@
 			<div class="row">
 				<div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 					<div class="col-xs-6">
-						<button @click="goToMaestro" class="btn btn-default pull-left">
+						<button @click="goToMaestro" class="btn btn-primary pull-left">
 							<i class="fa fa-mail-reply"></i> Volver
 						</button>
 					</div>
 
 					<div v-if="Object.keys(recursoBackUp).length" class="col-xs-6">
-						<button @click="isEditable = !isEditable" class="btn btn-default pull-right">
+						<button @click="isEditable = !isEditable" class="btn btn-warning pull-right">
 							<i class="fa fa-pencil"></i> Editar
 						</button>
 					</div>
@@ -35,19 +35,19 @@
 					<div v-if="Tipo =='Libro'" class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 						<label class="col-xs-3">ISBN</label>
 						<div class="col-xs-9">
-							<input :disabled="!isEditable" v-model="recurso.ISBN" type="text" class="form-control" aria-label="Nombre">
+							<input :disabled="!isEditable" v-model="recurso.ISBN" type="number" class="form-control" aria-label="Nombre">
 						</div>
 					</div>
 					<div v-if="Tipo =='Video'" class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 						<label class="col-xs-3">ISAN</label>
 						<div class="col-xs-9">
-							<input :disabled="!isEditable" v-model="recurso.ISAN" type="text" class="form-control" aria-label="Nombre">
+							<input :disabled="!isEditable" v-model="recurso.ISAN" type="number" class="form-control" aria-label="Nombre">
 						</div>
 					</div>
 					<div v-if="Tipo =='Audio'" class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 						<label class="col-xs-3">ISMN</label>
 						<div class="col-xs-9">
-							<input :disabled="!isEditable" v-model="recurso.ISMN" type="text" class="form-control" aria-label="Nombre">
+							<input :disabled="!isEditable" v-model="recurso.ISMN" type="number" class="form-control" aria-label="Nombre">
 						</div>
 					</div>
 				</div>
@@ -92,18 +92,18 @@
 				</div>
 
 				<div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-					<div class="col-xs-6">
-						<button @click="cancelarEdicion()" id="boton_cancelar" class="btn btn-default pull-left">
+					<div id="containerCancelar"class="col-xs-6">
+						<button @click="cancelarEdicion()" id="boton_cancelar" class="btn btn-danger pull-left">
 							<i class="fa fa-times"></i> Cancelar
 						</button>
 					</div>
-					<div class="col-xs-6">
-						<button v-if="!Object.keys(recursoBackUp).length" @click="guardarDatos()" id="boton_guardar" class="btn btn-default pull-right">
+					<div id="containerGuardar"class="col-xs-6">
+						<button v-if="!Object.keys(recursoBackUp).length" @click="guardarDatos()" id="boton_guardar" class="btn btn-success pull-right">
 							<i class="fa fa-floppy-o"></i>Guardar
 						</button>
 					</div>
-					<div class="col-xs-6">
-						<button v-if="Object.keys(recursoBackUp).length" :disabled="disableUpdate" @click="actualizarDatos()" id="boton_actualizar" class="btn btn-default pull-right">
+					<div id="containerActualizar"class="col-xs-6">
+						<button v-if="Object.keys(recursoBackUp).length" :disabled="disableUpdate" @click="actualizarDatos()" id="boton_actualizar" class="btn btn-success pull-right">
 							<i class="fa fa-undo"></i> Actualizar
 						</button>
 					</div>

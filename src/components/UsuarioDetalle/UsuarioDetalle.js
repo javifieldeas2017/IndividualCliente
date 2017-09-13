@@ -7,9 +7,7 @@ export default {
       Tipo: "",
       usuarioBackUp: {},
       isEditable: false,
-      tipos: [
-        "Estudiante", "Trabajador", "Desempleado", "Jubilado","Familia numerosa"
-      ]
+      tipos: ["Estudiante", "Trabajador", "Desempleado", "Jubilado", "Familia numerosa"]
     }
   },
   created() {
@@ -20,13 +18,7 @@ export default {
   },
   computed : {
     disableUpdate: function () {
-      var propiedades = [
-        "NIF",
-        "Tipo",
-        "Nombre",
-        "Domicilio",
-        "Telefono",
-      ];
+      var propiedades = ["NIF", "Tipo", "Nombre", "Domicilio", "Telefono"];
       var disable = true;
       for (var i = 0; i < propiedades.length; i++) {
         if (this.usuario[propiedades[i]] != this.usuarioBackUp[propiedades[i]]) {
@@ -45,9 +37,12 @@ export default {
       if (!this.Tipo) {
         mensaje += "&#9888; Seleccione un tipo.<br>";
       }
-      if (!this.usuario.NIF || this.usuario.NIF.length <= 0 || this.usuario.NIF.length > 120) {
-        mensaje += "&#9888; El NIF tiene que tener formato válido.<br>";
-      }
+
+      if (!this.usuario.NIF) 
+        mensaje += "&#9888; Escriba el NIF.<br>";
+      else 
+        mensaje = this.validarNif(this.usuario.NIF);
+
       if (!this.usuario.Nombre || this.usuario.Nombre.length < 8 || this.usuario.Nombre.length > 120) {
         mensaje += "&#9888; El nombre tiene que tener entre 8 y 120 caracteres.<br>";
       }
@@ -56,13 +51,35 @@ export default {
         mensaje += "&#9888; El domicilio tiene que tener entre 8 y 120 caracteres.<br>";
       }
 
-      if (isNaN(parseInt(this.usuario.Telefono))) {
-        mensaje += "&#9888; El teléfono debe ser un número entero.<br>";
+      if (isNaN(parseInt(this.usuario.Telefono)) || this.usuario.Telefono.length < 7) {
+        mensaje += "&#9888; El teléfono debe ser un número entero de al menos 8 dígitos.<br>";
       }
 
       return mensaje;
     },
+    validarNif: function (nif) {
+      var expreg = /^\d{8}[a-zA-Z]$/;
+      var dniMessage = "";
+      if (expreg.test(nif)) {
+        var numero = nif.substr(0, nif.length - 1);
+        numero = numero % 23;
+        var letraExtraida = nif.substr(nif.length - 1, 1);
+        var letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
+        letra = letra.substring(numero, numero + 1);
+        if (letra != letraExtraida.toUpperCase()) {
+          dniMessage = '&#9888; NIF erróneo, la letra del NIF no se corresponde.<br>';
+        }
+      } else {
+        dniMessage = '&#9888; NIF erróneo, formato no válido (ejemplo válido: 12345678A).<br>';
+      }
+      return dniMessage;
+    },
     cancelarEdicion() {
+      if (!Object.keys(this.usuarioBackUp).length) {
+        this.Tipo = "";
+      } else {
+        this.Tipo = this.usuarioBackUp.Tipo;
+      }
       this.usuario = JSON.parse(JSON.stringify(this.usuarioBackUp))
     },
     goToMaestro() {

@@ -4,13 +4,13 @@
 			<div class="row">
 				<div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 					<div class="col-xs-6">
-						<button @click="goToMaestro" class="btn btn-default pull-left">
+						<button @click="goToMaestro" class="btn btn-primary pull-left">
 							<i class="fa fa-mail-reply"></i> Volver
 						</button>
 					</div>
 
 					<div v-if="Object.keys(usuarioBackUp).length" class="col-xs-6">
-						<button @click="isEditable = !isEditable" class="btn btn-default pull-right">
+						<button @click="isEditable = !isEditable" class="btn btn-warning pull-right">
 							<i class="fa fa-pencil"></i> Editar
 						</button>
 					</div>
@@ -67,19 +67,19 @@
 					</div>
 				</div>
 
-				<div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-					<div class="col-xs-6">
-						<button @click="cancelarEdicion()" id="boton_cancelar" class="btn btn-default pull-left">
+				<div id="containerBtnInferiores" class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div id="containerCancelar" class="col-xs-6">
+						<button @click="cancelarEdicion()" id="boton_cancelar" class="btn btn-danger pull-left">
 							<i class="fa fa-times"></i> Cancelar
 						</button>
 					</div>
-					<div class="col-xs-6">
-						<button v-if="!Object.keys(usuarioBackUp).length" @click="guardarDatos()" id="boton_guardar" class="btn btn-default pull-right">
+					<div id="containerGuardar" class="col-xs-6">
+						<button v-if="!Object.keys(usuarioBackUp).length" @click="guardarDatos()" id="boton_guardar" class="btn btn-success pull-right">
 							<i class="fa fa-floppy-o"></i>Guardar
 						</button>
 					</div>
-					<div class="col-xs-6">
-						<button v-if="Object.keys(usuarioBackUp).length" :disabled="disableUpdate" @click="actualizarDatos()" id="boton_actualizar" class="btn btn-default pull-right">
+					<div id="containerActualizar" class="col-xs-6">
+						<button v-if="Object.keys(usuarioBackUp).length" :disabled="disableUpdate" @click="actualizarDatos()" id="boton_actualizar" class="btn btn-success pull-right">
 							<i class="fa fa-undo"></i> Actualizar
 						</button>
 					</div>

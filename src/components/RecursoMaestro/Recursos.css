@@ -1,40 +1,11 @@
-#RecursoMaestro .list-group-item:hover {
-  background-color: #E2E5E0;
-}
-
-#RecursoMaestro #insertar {
-  margin-bottom: 10px;
-}
-
-#RecursoMaestro .circulo {
-  height: 38px;
-  width: 38px;
-  border-radius: 50%;
-}
-
-#RecursoMaestro .list-group-item .circulo {
-  padding: 9px 0px 10px 0px;
-  float: left;
-}
-
-#RecursoMaestro .list-group-item .circulo>i {
-  color: white;
-  font-size: 20px;
-}
-
-#RecursoMaestro .boton_eliminar,
-#RecursoMaestro #insertar {
-  float: right;
-}
-
 .Libro {
-  background-color: #9850FD;
+  background-color: #9c27b0;
 }
 
 .Video {
-  background-color: #1DA810;
+  background-color: #795548;
 }
 
 .Audio {
-  background-color: #FF8800;
+  background-color: #ff9800;
 }

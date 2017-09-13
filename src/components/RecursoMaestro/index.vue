@@ -1,14 +1,15 @@
 <template>
 	<div id="RecursoMaestro">
 		<div class="container-fluid">
-			<div id="barra_botones" class="row">
+			<div>
 				<h3>Catálogo de recursos</h3>
-				<div class="col-sm-3 col-sm-offset-9">
-					<button id="insertar" @click="nuevoitem()" class="btn btn-default">
-						<i class="fa fa-plus"></i> Inserción
-					</button>
-				</div>
+
+				<button id="insertar" @click="nuevoitem()" class="btn btn-success">
+					<i class="fa fa-plus"></i> Inserción
+				</button>
+
 			</div>
+
 			<div v-if="items.length < 1">
 				<h3>No existen recursos insertadas</h3>
 			</div>
@@ -28,8 +29,9 @@
 						</div>
 					</router-link>
 					<div class="col col-xs-3">
-						<button @click="eliminarObjeto(item.Id)" class="boton_eliminar btn btn-default">
-							<i class="fa fa-trash"></i> <span class="hidden-xs">Eliminar</span>
+						<button @click="eliminarObjeto(item.Id)" class="boton_eliminar btn btn-danger">
+							<i class="fa fa-trash"></i>
+							<span class="hidden-xs">Eliminar</span>
 						</button>
 					</div>
 				</div>

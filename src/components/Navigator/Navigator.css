@@ -1,25 +1,88 @@
-.navbar-header a{
-	padding-top: 7px;
-	padding-bottom: 7px;
-
-}
-img{
-	margin-left: 10px;
-	width: 48px;
+nav {
+  background-color: #009688 !important;
 }
 
-.navbar-nav li a{
-	padding-top: 0px;
+.router-link-exact-active.router-link-active {
+  background: #607d8b !important;
 }
 
-.navbar-nav i{
-	display: block;
+.list-group {
+  padding: 0
 }
 
-.navbar-nav i:before{
-	font-size: 20px;
+.navbar-nav li {
+  padding: 0 !important;
 }
 
-.navbar-nav li{
-	padding-top: 10px;
+.navbar-nav li a {
+  display: inline-block;
+  padding: 11.5px;
+}
+
+.navbar-nav li a i {
+  padding-top: 10px !important;
+}
+
+.navbar-header a {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.navbar-default .navbar-brand {
+  color: #FFF;
+}
+
+.navbar-default .navbar-brand div {
+  float: right;
+  line-height: 40px;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #000;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #FFF !important;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+  color: #000 !important;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+	color: #000 !important;
+  }
+
+img {
+  margin-left: 10px;
+  width: 48px;
+}
+
+.navbar-nav li a {
+  padding-top: 0px;
+}
+
+.navbar-nav i {
+  display: block;
+}
+
+.navbar-nav i:before {
+  font-size: 20px;
+}
+
+.navbar-nav li {
+  padding-top: 10px;
+}
+
+.navbar-default .navbar-toggle {
+  background-color: #FFF;
+  border: 0 solid transparent;
+}
+
+.navbar-default .navbar-toggle:hover {
+  background-color: #000;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #009688;
 }

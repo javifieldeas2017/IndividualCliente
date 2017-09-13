@@ -1,19 +1,78 @@
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+#app,
+html {
+  font-family: 'Lato';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  background-color: #fff;
+  background-color: #fafafa;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0
+.slide-fade-enter-active {
+  transition: all .4s ease;
 }
 
-label{text-align: left;}
-input{margin-bottom: 5px}
-#insertar{margin-right: 30px}
+.slide-fade-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */
+
+{
+  transform: translateX(2000px);
+  opacity: 0;
+}
+
+label {
+  text-align: left;
+}
+
+input,
+select {
+  margin-bottom: 5px
+}
+
+.row.list-group-item:hover {
+  background-color: #5DD8B3;
+}
+
+#insertar {
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.row {
+  background-color: #F5F5F5;
+}
+
+.circulo {
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+}
+
+.list-group-item .circulo {
+  padding: 9px 0px 10px 0px;
+  float: left;
+}
+
+.list-group-item .circulo>i {
+  color: #FFF;
+  font-size: 20px;
+}
+
+.list-group>div:nth-child(odd) {
+  background-color: #E2E5E0;
+}
+
+#RecursoDetalle .row,
+#UsuarioDetalle .row {
+  background-color: #fafafa;
+}
+
+#containerCancelar,
+#containerGuardar,
+#containerActualizar {
+  padding: 0px;
+}
