@@ -17,13 +17,17 @@
 					<router-link :to="{ name: 'PrestamoDetalle', params: { id: item.Id }}">
 						<div class="col col-xs-3">
 							<div class="circulo" :class="item.Tipo">
-<!-- 								<i v-if="item.Tipo =='Estudiante'" class="fa fa-graduation-cap fa-fw" aria-hidden="true"></i>
-								<i v-if="item.Tipo =='Trabajador'" class="fa fa-briefcase fa-fw" aria-hidden="true"></i> -->
 							</div>
 						</div>
 						<div id="main_info" class="col col-xs-6 col-sm-6">
-							<div> {{ item.Nombre }} </div>
-							<div> {{ item.Devuelto }} </div>
+							<div> NIF: {{ item.NIF }} </div>
+							<span v-if="item.ISBN!=0"> ISBN: </span>
+							<span v-if="item.ISAN!=0"> ISAN: </span>
+							<span v-if="item.ISMN!=0"> ISMN: </span>
+							<span v-if="item.ISBN!=0"> {{item.ISBN}} </span>
+							<span v-if="item.ISAN!=0"> {{item.ISAN}} </span>
+							<span v-if="item.ISMN!=0"> {{item.ISMN}} </span>
+							<div :class="item.Devuelto ? 'devuelto' : 'pendiente'"> {{ item.Devuelto? "Devuelto" : "Pendiente devolución" }} </div>
 						</div>
 					</router-link>
 					<div class="col col-xs-3">

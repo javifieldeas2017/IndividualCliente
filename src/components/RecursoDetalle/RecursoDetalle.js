@@ -127,6 +127,9 @@ export default {
     guardarDatos() {
       let _this = this;
       this.recurso.Tipo = this.Tipo;
+      this.recurso.ISBN = this.Tipo == 'Libro'? this.recurso.ISBN : 0;
+      this.recurso.ISAN = this.Tipo == 'Video'? this.recurso.ISAN : 0;
+      this.recurso.ISMN = this.Tipo == 'Audio'? this.recurso.ISMN : 0;
       this.recurso.Categoria = this.Categoria;
       var mensaje = this.notValid();
       if (mensaje) {
@@ -175,6 +178,9 @@ export default {
           },
           callback: function (result) {
             _this.recurso.Tipo = _this.Tipo;
+            _this.recurso.ISBN = _this.Tipo == 'Libro'? _this.recurso.ISBN : 0;
+            _this.recurso.ISAN = _this.Tipo == 'Video'? _this.recurso.ISAN : 0;
+            _this.recurso.ISMN = _this.Tipo == 'Audio'? _this.recurso.ISMN : 0;
             _this.recurso.Categoria = _this.Categoria;
             if (result) {
               $.ajax({

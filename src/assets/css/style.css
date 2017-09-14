@@ -67,7 +67,8 @@ select {
 }
 
 #RecursoDetalle .row,
-#UsuarioDetalle .row {
+#UsuarioDetalle .row,
+#PrestamoDetalle .row{
   background-color: #fafafa;
 }
 

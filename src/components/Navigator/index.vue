@@ -9,7 +9,8 @@
 				</button>
 				<a class="navbar-brand" href="#">
 					<!-- 					<img :src="datos.logo" :alt="datos.nombre"> -->
-					<i class="fa fa-university fa-2x " aria-hidden="true"></i><div>Biblioteca Fieldeas</div>
+					<i class="fa fa-university fa-2x " aria-hidden="true"></i>
+					<div>Biblioteca Fieldeas</div>
 				</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
@@ -21,7 +22,12 @@
 					</li>
 					<li>
 						<router-link to="/UsuarioMaestro" exact class="col-xs-12">
-							<i class="fa fa-user" aria-hidden="true"></i>Usuarios
+							<i class="fa fa-vcard" aria-hidden="true"></i>Usuarios
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/PrestamoMaestro" exact class="col-xs-12">
+							<i class="fa fa-credit-card" aria-hidden="true"></i>Prestamos
 						</router-link>
 					</li>
 				</ul>

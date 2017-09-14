@@ -10,7 +10,7 @@
 			</div>
 
 			<div v-if="items.length < 1">
-				<h3>No existen Usuarios insertadas</h3>
+				<h3>No existen usuarios insertados</h3>
 			</div>
 			<div v-else class="list-group col-sm-8 col-sm-offset-2">
 				<div v-for="item in items" class="row list-group-item" :key="item.Id">
